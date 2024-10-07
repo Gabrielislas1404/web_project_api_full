@@ -1,0 +1,104 @@
+.elements {
+  max-width: 880px;
+  padding-top: 36px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  row-gap: 20px;
+  column-gap: 17px;
+}
+
+.elements__container {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 282px;
+  height: 361px;
+  overflow: hidden;
+  position: relative;
+}
+
+.elements__image {
+  width: 282px;
+  height: 282px;
+  cursor: pointer;
+  background-color: #000;
+}
+
+.elements__trash {
+  background-color: transparent;
+  border: none;
+  width: 18px;
+  height: 19.3px;
+  position: absolute;
+  top: 8px;
+  right: 4px;
+  cursor: pointer;
+}
+
+.elements__trash_hidden {
+  display: none;
+}
+
+.elements__trash:hover {
+  opacity: 0.6;
+}
+
+.elements__description {
+  display: flex;
+  justify-content: space-between;
+}
+
+.elements__text {
+  color: #000;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  width: 239px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-left: 25px;
+  margin-right: 5px;
+}
+
+.elements__heart {
+  background: url(../images/elementsheart.svg) no-repeat center;
+  background-size: contain;
+  margin-right: 15px;
+  width: 21px;
+  height: 19px;
+  cursor: pointer;
+  border: #000;
+}
+
+.elements__heart:hover {
+  opacity: 0.5;
+}
+
+.elements__black-heart {
+  background: url(../images/elementsblackheart.svg) no-repeat center;
+  background-size: contain;
+  width: 20.759px;
+  margin-right: 15px;
+  border: #000;
+}
+
+.elements__like-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 21px;
+  height: 35px;
+  margin-top: 22px;
+  margin-right: 23px;
+}
+
+.elements__like {
+  padding-left: 6px;
+  color: #000;
+  display: flex;
+  align-items: center;
+}

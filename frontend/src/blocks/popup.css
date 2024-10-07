@@ -1,0 +1,378 @@
+.popup {
+  position: fixed;
+  top: 120px;
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.popup_register {
+  position: fixed;
+  top: 150px;
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.popup__wrapper_register {
+  position: relative;
+  width: 280px;
+  height: 308px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.popup__image-register {
+  padding-top: 20px;
+  width: 120px;
+}
+
+.popup_register-title {
+  width: 90%;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.popup__picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.popup__card-name {
+  color: #fff;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 10px;
+}
+
+.popup_hide {
+  opacity: 1;
+  visibility: visible;
+}
+.popup__overlay {
+  opacity: 0.5;
+  background-color: #000;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  min-width: 320px;
+  cursor: pointer;
+}
+
+.popup__content {
+  background-color: #fff;
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  width: 282px;
+  height: 322px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.popup__content_profile {
+  height: 272px;
+}
+
+.popup__content_card {
+  width: 430px;
+  height: 151px;
+}
+
+.popup__wrapper {
+  padding-bottom: -15px;
+  text-align: center;
+}
+
+.popup__image-container {
+  width: 240px;
+  height: 299px;
+  position: relative;
+  top: 20px;
+}
+
+.popup__close-button {
+  background: url(../images/formclosebutton.svg) no-repeat center;
+  background-size: contain;
+  border: none;
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  right: 0;
+  top: -40px;
+  cursor: pointer;
+}
+
+.popup__close-button_image {
+  width: 30px;
+  height: 30px;
+  right: -35px;
+  top: -35px;
+}
+
+.popup__close-button:hover {
+  opacity: 0.6;
+}
+
+.popup__title {
+  margin-top: 25px;
+  margin-bottom: 65px;
+  width: 238px;
+  color: #000;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  padding-bottom: 5px;
+}
+
+.popup__title_delete {
+  margin-bottom: 25px;
+}
+
+.popup__title_picture {
+  margin-bottom: 30px;
+}
+
+.popup__input {
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 238px;
+  height: 14px;
+  border: none;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #000;
+}
+
+.popup__input:invalid {
+  border-bottom: 1px solid #f00;
+}
+
+.popup__input_occupation {
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 45px;
+  width: 238px;
+  height: 14px;
+  border: none;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #000;
+}
+
+.popup__input_link {
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 45px;
+  width: 238px;
+  height: 14px;
+  border: none;
+  padding-bottom: 5px;
+}
+
+.popup__line {
+  width: 238px;
+  height: 1px;
+  color: #f00;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.popup__save-button {
+  margin-top: 45px;
+  width: 238px;
+  height: 46px;
+  border-radius: 2px;
+  background: #000;
+  color: #fff;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.popup__save-button:hover {
+  opacity: 0.8;
+}
+
+.popup__save-button:disabled {
+  color: #ccc;
+  background: #fff;
+  cursor: default;
+  opacity: 0.5;
+}
+
+.popup__save-button_delete {
+  width: 358px;
+  margin-top: 0;
+}
+
+@media screen and (min-width: 720px) {
+  .popup_image {
+    top: 50px;
+    width: 433px;
+    height: 540px;
+  }
+
+  .popup__close-button_image {
+    width: 40px;
+    height: 40px;
+    right: -50px;
+    top: -50px;
+  }
+
+  .popup__image-container {
+    width: 433px;
+    height: 540px;
+  }
+
+  .popup__content_profile {
+    height: 272px;
+  }
+
+  .popup__wrapper {
+    padding-bottom: -15px;
+    text-align: center;
+  }
+  .popup__title_picture {
+    margin-bottom: 30px;
+  }
+
+  .popup__content_card {
+    width: 430px;
+    height: 151px;
+  }
+
+  .popup__save-button_delete {
+    width: 358px;
+    margin-top: 0;
+  }
+  .popup__wrapper_register {
+    position: relative;
+    width: 430px;
+    height: 330px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    z-index: 1;
+  }
+
+  .popup__image-register {
+    padding-top: 20px;
+    width: 120px;
+  }
+
+  .popup_register-title {
+    width: 90%;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .popup {
+    top: 165px;
+  }
+
+  .popup_image {
+    top: 50px;
+    width: 816px;
+  }
+
+  .popup__content {
+    width: 430px;
+    height: 330px;
+  }
+
+  .popup__image-container {
+    width: 816px;
+  }
+
+  .popup__close-button {
+    background-size: cover;
+    width: 40px;
+    height: 40px;
+    right: -45px;
+  }
+
+  .popup__title {
+    margin-top: 34px;
+    margin-bottom: 54px;
+    width: 358px;
+    font-size: 24px;
+  }
+
+  .popup__title_delete {
+    margin-bottom: 20px;
+  }
+  .popup__input {
+    width: 358px;
+  }
+  .popup__input_occupation {
+    width: 358px;
+  }
+  .popup__line {
+    width: 358px;
+  }
+  .popup__save-button {
+    margin-top: 48px;
+    width: 358px;
+    height: 50px;
+    font-size: 18px;
+  }
+  .popup__content_profile {
+    height: 272px;
+  }
+  .popup__picturebox {
+    padding-bottom: -15px;
+    text-align: center;
+  }
+
+  .popup__title_picture {
+    margin-bottom: 10px;
+  }
+
+  .popup__content_card {
+    width: 430px;
+    height: 151px;
+  }
+  .popup__save-button_delete {
+    width: 358px;
+    margin-top: 0;
+  }
+}

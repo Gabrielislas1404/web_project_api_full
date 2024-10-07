@@ -1,0 +1,26 @@
+.footer {
+  padding-top: 48px;
+  padding-bottom: 36px;
+  display: flex;
+  justify-content: center;
+}
+.footer__copyright {
+  color: #545454;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 282px;
+}
+
+@media screen and (min-width: 1280px) {
+  .footer {
+    padding-top: 60px;
+    padding-bottom: 67px;
+  }
+  .footer__copyright {
+    font-size: 18px;
+    width: 880px;
+  }
+}
