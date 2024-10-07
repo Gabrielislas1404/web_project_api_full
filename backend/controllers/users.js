@@ -1,4 +1,8 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+const { JWT_SECRET } = process.env;
 const User = require("../models/user");
 
 const getUsers = async (req, res) => {
@@ -16,7 +20,7 @@ const getUsers = async (req, res) => {
 
 const getUserById = async (req, res) => {
   try {
-    const user = await User.findById(req.params.userId);
+    const user = await User.findById(req.user._id);
     if (!user) {
       return res.status(404).json({ message: "User nost found" });
     }
@@ -27,13 +31,40 @@ const getUserById = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
+  const { name, about, avatar, email } = req.body;
+
+  let user = await User.findOne({ email });
+  if (user) {
+    throw new Error(" El email ya ha sido registrado");
+  }
+
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(req.body.password, salt, async function (err, hash) {
+      user = await User.create({ name, about, avatar, email, password: hash });
+      res.send({ user });
+    });
+  });
+};
+
+const login = async (req, res, next) => {
+  const { email, password } = req.body;
   try {
-    const { name, about, avatar } = req.body;
-    const newUser = new User({ name, about, avatar });
-    await newUser.save();
-    res.status(200).json(newUser);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+    const user = await User.findOne({ email }).select("+password");
+
+    if (!user) {
+      return res.status(401).send({ message: "Invalid email or password" });
+    }
+
+    const isMatched = await bcrypt.compare(password, user.password);
+
+    if (!isMatched) {
+      return res.status(401).send({ message: "Invalid email or password" });
+    }
+
+    const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: "7d" });
+    res.send({ token });
+  } catch (err) {
+    next(err);
   }
 };
 
@@ -77,6 +108,7 @@ module.exports = {
   getUsers,
   getUserById,
   createUser,
+  login,
   updateProfile,
   updateAvatar,
 };
