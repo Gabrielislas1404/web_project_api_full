@@ -143,7 +143,7 @@ function App() {
         .then((res) => {
           if (res) {
             setIsLogged(true);
-            history.pushState('/home');
+            history.push('/home');
           }
         })
         .catch((err) => console.log(err));

@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const { PORT = 3000 } = process.env;
+const errorHandler = require("./middleware/errorHandler");
+const { requestLogger, errorLogger } = require("./middleware/logger");
 const app = express();
 
 mongoose
@@ -23,8 +25,13 @@ app.use(express.json());
   next();
 }); */
 
+app.use(requestLogger);
+
 app.use("/users", usersRouter);
 app.use("/cards", cardsRouter);
+
+app.use(errorLogger);
+app.use(errorHandler);
 
 app.use((req, res) => {
   res.status(400).json({ message: "Resource not found" });
