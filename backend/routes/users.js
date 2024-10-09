@@ -56,7 +56,7 @@ router.patch(
       about: Joi.string().required().min(5).max(200),
     }),
   }),
-  userController.updateProfile
+  updateProfile
 );
 router.patch(
   "/me/avatar",
@@ -65,7 +65,7 @@ router.patch(
       avatar: Joi.string().required().uri(),
     }),
   }),
-  userController.updateAvatar
+  updateAvatar
 );
 
 module.exports = router;
