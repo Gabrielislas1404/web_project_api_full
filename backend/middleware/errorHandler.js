@@ -3,5 +3,5 @@ module.exports = (err, req, res, next) => {
     res.status(500).send({ message: "System Failure" });
     return;
   }
-  res.status(err.statusCode).send({ message: err.message });
+  res.status(err.statusCode || 500).send({ message: err.message });
 };
