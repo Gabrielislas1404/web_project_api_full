@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const errorHandler = require("./middleware/errorHandler");
 const { requestLogger, errorLogger } = require("./middleware/logger");
-const auth = require("./middleware/auth");
+/* const auth = require("./middleware/auth"); */
 require("dotenv").config();
 const { errors } = require("celebrate");
 const app = express();
@@ -52,7 +52,7 @@ app.use(requestLogger);
 app.use("/users", usersRouter);
 app.use("/cards", cardsRouter);
 
-app.use(auth);
+/* app.use(auth); */
 
 app.use(errorLogger);
 app.use(errorHandler);
