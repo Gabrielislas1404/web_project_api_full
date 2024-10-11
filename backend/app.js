@@ -4,6 +4,7 @@ const errorHandler = require("./middleware/errorHandler");
 const { requestLogger, errorLogger } = require("./middleware/logger");
 /* const auth = require("./middleware/auth"); */
 require("dotenv").config();
+const cors = require("cors");
 const { errors } = require("celebrate");
 const app = express();
 
@@ -11,11 +12,10 @@ const allowedCors = [
   "http://localhost:3000",
   "https://gabriel14.mooo.com",
   "https://www.gabriel14.mooo.com",
-  "https://gabriel14.mooo.com/signup",
-  "https://www.gabriel14.mooo.com/signup",
-  "https://gabriel14.mooo.com/signin",
-  "https://www.gabriel14.mooo.com/signin",
 ];
+
+app.use(cors());
+
 app.use((req, res, next) => {
   const { origin } = req.headers;
   const { method } = req;
