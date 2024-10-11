@@ -14,9 +14,12 @@ const allowedCors = [
   "https://www.gabriel14.mooo.com",
 ];
 
-app.use(cors());
+const corsOptions = { origin: allowedCors };
 
-app.use((req, res, next) => {
+app.use(cors());
+app.options("*", cors(corsOptions));
+
+/* app.use((req, res, next) => {
   const { origin } = req.headers;
   const { method } = req;
   const DEFAULT_ALLOWED_METHODS = "GET,HEAD,PUT,PATCH,POST,DELETE";
@@ -31,7 +34,7 @@ app.use((req, res, next) => {
   }
   next();
 });
-
+ */
 const { PORT = 3000 } = process.env;
 
 mongoose
