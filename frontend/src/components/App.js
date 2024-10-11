@@ -13,7 +13,7 @@ import AddPlacePopup from './AddPlacePopup';
 import Login from './Login';
 import Register from './Register';
 import ProtectedRoute from './ProtectedRoute';
-import { Route, Switch, Redirect, useHistory, Link } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import * as auth from '../utils/auth';
 
 function App() {
