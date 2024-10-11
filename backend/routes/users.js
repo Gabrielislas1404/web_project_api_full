@@ -9,7 +9,7 @@ const {
   updateAvatar,
 } = require("../controllers/users");
 const { Joi, Segments, celebrate } = require("celebrate");
-const auth = require("../middleware/auth");
+/* const auth = require("../middleware/auth"); */
 
 router.get("/crash-test", () => {
   setTimeout(() => {
@@ -39,7 +39,7 @@ router.post(
   login
 );
 
-router.use(auth);
+/* router.use(auth); */
 
 router.get("/", getUsers);
 router.get("/:userId", getUserById);
