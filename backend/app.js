@@ -16,7 +16,7 @@ const allowedCors = [
 
 const corsOptions = { origin: allowedCors };
 
-/* app.use(cors()); */
+app.use(cors());
 
 app.use((req, res, next) => {
   const { origin } = req.headers;
