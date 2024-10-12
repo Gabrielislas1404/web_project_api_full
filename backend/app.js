@@ -16,10 +16,9 @@ const allowedCors = [
 
 const corsOptions = { origin: allowedCors };
 
-app.use(cors());
-app.options("*", cors(corsOptions));
+/* app.use(cors()); */
 
-/* app.use((req, res, next) => {
+app.use((req, res, next) => {
   const { origin } = req.headers;
   const { method } = req;
   const DEFAULT_ALLOWED_METHODS = "GET,HEAD,PUT,PATCH,POST,DELETE";
@@ -34,7 +33,7 @@ app.options("*", cors(corsOptions));
   }
   next();
 });
- */
+
 const { PORT = 3000 } = process.env;
 
 mongoose
