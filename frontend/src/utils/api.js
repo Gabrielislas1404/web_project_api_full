@@ -126,6 +126,9 @@ class Api {
   }
 }
 
-const api = new Api('https://api.gabriel14.mooo.com');
+const api = new Api('http://localhost:3000');
 
 export default api;
+
+/* const api = new Api('https://api.gabriel14.mooo.com');
+ */

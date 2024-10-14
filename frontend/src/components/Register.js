@@ -19,9 +19,10 @@ export default function Register() {
       auth
         .register(email, password)
         .then((res) => {
-          console.log(res, res._id);
           if (!res._id) {
             setIsRegistered(false);
+          } else {
+            setIsRegistered(true);
           }
           setOpen(true);
           setTimeout(() => {

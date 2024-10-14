@@ -18,11 +18,31 @@ const getUsers = async (req, res) => {
   }
 };
 
+const createUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const hash = await bcrypt.hash(password, 10);
+
+    const user = await UserInfo.create({
+      email,
+      password: hash,
+    });
+
+    res.send({
+      _id: user._id,
+      email: user.email,
+    });
+  } catch (err) {
+    handleError(err, res);
+  }
+};
+
 const getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
     if (!user) {
-      return res.status(404).json({ message: "User nost found" });
+      return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user);
   } catch (error) {
@@ -30,7 +50,7 @@ const getUserById = async (req, res) => {
   }
 };
 
-const createUser = async (req, res) => {
+/* const createUser = async (req, res) => {
   const { name, about, avatar, email } = req.body;
 
   let user = await User.findOne({ email });
@@ -44,7 +64,7 @@ const createUser = async (req, res) => {
       res.send({ user });
     });
   });
-};
+}; */
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
@@ -61,7 +81,9 @@ const login = async (req, res, next) => {
       return res.status(401).send({ message: "Invalid email or password" });
     }
 
-    const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: "7d" });
+    const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
+      expiresIn: "7d",
+    });
     res.send({ token });
   } catch (err) {
     next(err);
@@ -104,6 +126,16 @@ const updateAvatar = async (req, res) => {
   }
 };
 
+const newUser = async (req, res) => {
+  const { name, about, avatar } = req.body;
+  try {
+    const user = await UserInfo.create({ name, about, avatar });
+    res.send(user);
+  } catch (error) {
+    handleError(error, res);
+  }
+};
+
 module.exports = {
   getUsers,
   getUserById,
@@ -111,4 +143,5 @@ module.exports = {
   login,
   updateProfile,
   updateAvatar,
+  newUser,
 };

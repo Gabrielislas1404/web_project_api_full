@@ -7,6 +7,7 @@ const {
   getUserById,
   updateProfile,
   updateAvatar,
+  newUser,
 } = require("../controllers/users");
 const { Joi, Segments, celebrate } = require("celebrate");
 const auth = require("../middleware/auth");
@@ -41,15 +42,12 @@ router.post(
 
 router.use(auth);
 
-router.get("/", getUsers);
-router.get("/:userId", getUserById);
-router.patch("/me", updateProfile);
-router.patch("/me/avatar", updateAvatar);
-
-router.get("/users/me", getUsers);
+router.get("/users", getUsers);
+router.get("/users/me", getUserById);
+router.post("/users", newUser);
 
 router.patch(
-  "/me",
+  "/users/me",
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       name: Joi.string().required().min(5).max(40),
@@ -59,7 +57,7 @@ router.patch(
   updateProfile
 );
 router.patch(
-  "/me/avatar",
+  "/users/me/avatar",
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       avatar: Joi.string().required().uri(),

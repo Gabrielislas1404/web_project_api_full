@@ -1,4 +1,6 @@
-export const BASE_URL = 'https://api.gabriel14.mooo.com';
+/* export const BASE_URL = 'https://api.gabriel14.mooo.com'; */
+
+export const BASE_URL = 'http://localhost:3000';
 
 export const register = async (email, password) => {
   try {

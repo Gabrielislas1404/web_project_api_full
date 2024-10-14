@@ -1,12 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const { errors } = require("celebrate");
 const errorHandler = require("./middleware/errorHandler");
 const { requestLogger, errorLogger } = require("./middleware/logger");
 /* const auth = require("./middleware/auth"); */
 require("dotenv").config();
-const cors = require("cors");
-const { errors } = require("celebrate");
+/* const cors = require("cors"); */
+
 const app = express();
+
+console.log(process.env.JWT_SECRET);
 
 const allowedCors = [
   "http://localhost:3000",
@@ -51,7 +54,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(requestLogger);
 
-app.use("/users", usersRouter);
+app.use(usersRouter);
 app.use("/cards", cardsRouter);
 
 /* app.use(auth); */
@@ -61,9 +64,19 @@ app.use(errorHandler);
 
 app.use(errors());
 
-app.use("/", (req, res) => {
-  res.status(400).json({ message: "Resource not found" });
+app.get("/*", (req, res) => {
+  res.status(404).send({
+    message: "NOT FOUND",
+  });
 });
+
+app.post("/*", (req, res) => {
+  res.status(404).send({ message: "NOT FOUND" });
+});
+
+/* app.use("/", (req, res) => {
+  res.status(400).json({ message: "Resource not found" });
+}); */
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
