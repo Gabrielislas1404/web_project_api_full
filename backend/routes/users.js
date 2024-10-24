@@ -11,7 +11,6 @@ const {
 } = require("../controllers/users");
 const { Joi, Segments, celebrate } = require("celebrate");
 const auth = require("../middleware/auth");
-
 router.get("/crash-test", () => {
   setTimeout(() => {
     throw new Error("El servidor va a caer");

@@ -1,9 +1,11 @@
-const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { JWT_SECRET } = process.env;
 const User = require("../models/user");
+const handleError = require("../middleware/errorHandler");
+
+
 
 const getUsers = async (req, res) => {
   try {
@@ -24,7 +26,7 @@ const createUser = async (req, res) => {
   try {
     const hash = await bcrypt.hash(password, 10);
 
-    const user = await UserInfo.create({
+    const user = await User.create({
       email,
       password: hash,
     });
@@ -34,7 +36,8 @@ const createUser = async (req, res) => {
       email: user.email,
     });
   } catch (err) {
-    handleError(err, res);
+    
+    handleError(err, req, res);
   }
 };
 
@@ -129,10 +132,10 @@ const updateAvatar = async (req, res) => {
 const newUser = async (req, res) => {
   const { name, about, avatar } = req.body;
   try {
-    const user = await UserInfo.create({ name, about, avatar });
+    const user = await User.create({ name, about, avatar });
     res.send(user);
   } catch (error) {
-    handleError(error, res);
+    handleError(error,req,  res);
   }
 };
 

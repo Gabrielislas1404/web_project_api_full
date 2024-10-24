@@ -2,7 +2,7 @@ class Api {
   constructor(baseUrl) {
     this.baseUrl = baseUrl;
     this.headers = {
-      authorization: localStorage.getItem('jwt')
+      Authorization: localStorage.getItem('jwt')
         ? `Bearer ${localStorage.getItem('jwt')}`
         : '',
       'Content-Type': 'application/json',
@@ -10,7 +10,7 @@ class Api {
   }
 
   setToken(token) {
-    this.headers.authorization = `Bearer ${token}`;
+    this.headers.Authorization = `Bearer ${token}`;
   }
 
   getInitialCards() {

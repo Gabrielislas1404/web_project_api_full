@@ -3,13 +3,9 @@ const mongoose = require("mongoose");
 const { errors } = require("celebrate");
 const errorHandler = require("./middleware/errorHandler");
 const { requestLogger, errorLogger } = require("./middleware/logger");
-/* const auth = require("./middleware/auth"); */
-require("dotenv").config();
-/* const cors = require("cors"); */
-
+const cors = require("cors");
 const app = express();
-
-console.log(process.env.JWT_SECRET);
+require("dotenv").config();
 
 const allowedCors = [
   "http://localhost:3000",
@@ -19,7 +15,7 @@ const allowedCors = [
 
 const corsOptions = { origin: allowedCors };
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
   const { origin } = req.headers;
@@ -57,7 +53,6 @@ app.use(requestLogger);
 app.use(usersRouter);
 app.use("/cards", cardsRouter);
 
-/* app.use(auth); */
 app.use(errorLogger);
 app.use(errorHandler);
 
