@@ -1,20 +1,20 @@
-import '../index.css';
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import api from '../utils/api';
-import Header from './Header';
-import Main from './Main';
-import Footer from './Footer';
-import PopupWithForm from './PopupWithForm';
-import EditProfilePopup from './EditProfilePopup';
-import EditAvatarPopup from './EditAvatarPopup';
-import AddPlacePopup from './AddPlacePopup';
-import Login from './Login';
-import Register from './Register';
-import ProtectedRoute from './ProtectedRoute';
-import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
-import * as auth from '../utils/auth';
+import "../index.css";
+import React from "react";
+import { useState, useEffect } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import api from "../utils/api";
+import Header from "./Header";
+import Main from "./Main";
+import Footer from "./Footer";
+import PopupWithForm from "./PopupWithForm";
+import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
+import Login from "./Login";
+import Register from "./Register";
+import ProtectedRoute from "./ProtectedRoute";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import * as auth from "../utils/auth";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -27,7 +27,7 @@ function App() {
   const [confirmation, setConfirmation] = useState(false);
 
   const [isLogged, setIsLogged] = useState(false);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   function handleCardDelete(card) {
     setCardToDelete(card);
@@ -35,7 +35,7 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api.likeCard({ id: card._id, isLiked: !isLiked }).then((newCard) => {
       setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
     });
@@ -46,6 +46,9 @@ function App() {
   }, []);
 
   const handleUpdateUser = ({ name, about }) => {
+    if (!name) name = currentUser.name;
+    if (!about) about = currentUser.about;
+
     api
       .updateUser({ name, about })
       .then((newUserData) => {
@@ -53,7 +56,7 @@ function App() {
         setIsEditProfilePopupOpen(false);
       })
       .catch((error) => {
-        console.error('Error', error);
+        console.error("Error", error);
       });
   };
 
@@ -112,10 +115,10 @@ function App() {
   };
 
   const logOutButton = () => {
-    localStorage.removeItem('jwt');
+    localStorage.removeItem("jwt");
     setCurrentUser({});
     setIsLogged(false);
-    history.push('/login');
+    history.push("/login");
   };
 
   const history = useHistory();
@@ -125,6 +128,9 @@ function App() {
       api.getUserInfo().then((user) => {
         setCurrentUser(user);
         api.getInitialCards().then((cards) => {
+          if (!cards) {
+            return;
+          }
           setCards(cards);
         });
       });
@@ -136,14 +142,14 @@ function App() {
   }, []);
 
   const tokenExist = () => {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem("jwt");
     if (jwt) {
       auth
         .getUserToken(jwt)
         .then((res) => {
           if (res) {
             setIsLogged(true);
-            history.push('/home');
+            history.push("/home");
           }
         })
         .catch((err) => console.log(err));
@@ -204,12 +210,12 @@ function App() {
               />
 
               <PopupWithForm
-                name={'erase_photo'}
-                title={'¿Estás seguro/a?'}
-                buttonTitle={'Si'}
-                content={'card'}
-                buttonClass={'delete'}
-                modifier={'delete'}
+                name={"erase_photo"}
+                title={"¿Estás seguro/a?"}
+                buttonTitle={"Si"}
+                content={"card"}
+                buttonClass={"delete"}
+                modifier={"delete"}
                 isOpen={confirmation}
                 onClose={closeAllPopups}
                 onSubmit={handleSubmitConfirm}

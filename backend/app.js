@@ -8,7 +8,7 @@ const app = express();
 require("dotenv").config();
 
 const allowedCors = [
-  "http://localhost:3000",
+  "http://localhost:3001",
   "https://gabriel14.mooo.com",
   "https://www.gabriel14.mooo.com",
 ];

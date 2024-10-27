@@ -1,31 +1,34 @@
-import React from 'react';
-import { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import headerLogo from '../images/headerlogo.svg';
-import * as auth from '../utils/auth';
-import api from '../utils/api';
+import React from "react";
+import { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import headerLogo from "../images/headerlogo.svg";
+import * as auth from "../utils/auth";
+import api from "../utils/api";
 
 export default function Login({ setIsLogged, email, setEmail }) {
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
 
   const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!email || !password) {
+      alert("Rellena todos los campos");
       return;
     }
     auth
       .login(email, password)
       .then((res) => {
         if (res.token) {
-          localStorage.setItem('jwt', res.token);
+          localStorage.setItem("jwt", res.token);
           api.setToken(res.token);
           setIsLogged(true);
-          history.push('/home');
+          history.push("/home");
         }
       })
-      .catch(console.log);
+      .catch((err) => {
+        alert(err.message);
+      });
   };
 
   return (

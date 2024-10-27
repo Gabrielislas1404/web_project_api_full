@@ -2,10 +2,10 @@ class Api {
   constructor(baseUrl) {
     this.baseUrl = baseUrl;
     this.headers = {
-      Authorization: localStorage.getItem('jwt')
-        ? `Bearer ${localStorage.getItem('jwt')}`
-        : '',
-      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem("jwt")
+        ? `Bearer ${localStorage.getItem("jwt")}`
+        : "",
+      "Content-Type": "application/json",
     };
   }
 
@@ -19,7 +19,7 @@ class Api {
         if (!res.ok) throw new Error(`Server error: ${res.status}`);
         return res.json();
       })
-      .catch((error) => console.error('Error', error));
+      .catch((error) => console.error("Error", error));
   }
 
   getUserInfo() {
@@ -30,28 +30,30 @@ class Api {
         if (!res.ok) throw new Error(`Server error: ${res.status}`);
         return res.json();
       })
-      .catch((error) => console.error('Error', error));
+      .catch((error) => console.error("Error", error));
   }
   updateUser({ name, about }) {
     return fetch(`${this.baseUrl}/users/me`, {
       headers: this.headers,
-      method: 'PATCH',
+      method: "PATCH",
       body: JSON.stringify({
         name,
         about,
       }),
     })
       .then((res) => {
-        if (!res.ok) throw new Error(`Error en servidor: ${res.status}`);
+        if (!res.ok) {
+          throw new Error(`Error en servidor: ${res.status}`);
+        }
         return res.json();
       })
-      .catch((error) => console.error('Error', error));
+      .catch((error) => console.error("Error", error));
   }
 
   updateAvatar({ avatar }) {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
       headers: this.headers,
-      method: 'PATCH',
+      method: "PATCH",
       body: JSON.stringify({
         avatar,
       }),
@@ -60,13 +62,13 @@ class Api {
         if (!res.ok) throw new Error(`Error en servidor: ${res.status}`);
         return res.json();
       })
-      .catch((error) => console.error('Error', error));
+      .catch((error) => console.error("Error", error));
   }
 
   addCard({ name, link }) {
     return fetch(`${this.baseUrl}/cards`, {
       headers: this.headers,
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({
         name,
         link,
@@ -76,13 +78,14 @@ class Api {
         if (!res.ok) throw new Error(`Error en servidor: ${res.status}`);
         return res.json();
       })
-      .catch((error) => console.error('Error', error));
+      .catch((error) => console.error("Error", error));
   }
 
   deleteCard(idCard) {
+    console.log(`${this.baseUrl}/cards/${idCard}`);
     return fetch(`${this.baseUrl}/cards/${idCard}`, {
       headers: this.headers,
-      method: 'DELETE',
+      method: "DELETE",
       body: JSON.stringify({
         idCard,
       }),
@@ -91,12 +94,12 @@ class Api {
         if (!res.ok) throw new Error(`Error en servidor: ${res.status}`);
         return res.json();
       })
-      .catch((error) => console.error('Error', error));
+      .catch((error) => console.error("Error", error));
   }
 
   likeCard({ id, isLiked }) {
-    const method = isLiked ? 'PUT' : 'DELETE';
-    return fetch(`${this.baseUrl}/cards/likes/${id}`, {
+    const method = isLiked ? "PUT" : "DELETE";
+    return fetch(`${this.baseUrl}/cards/${id}/likes`, {
       headers: this.headers,
       method: method,
       body: JSON.stringify({
@@ -107,13 +110,13 @@ class Api {
         if (!res.ok) throw new Error(`Error en servidor: ${res.status}`);
         return res.json();
       })
-      .catch((error) => console.error('Error', error));
+      .catch((error) => console.error("Error", error));
   }
 
   unlikeCard(id) {
     return fetch(`${this.baseUrl}/cards/likes/${id}`, {
       headers: this.headers,
-      method: 'DELETE',
+      method: "DELETE",
       body: JSON.stringify({
         id,
       }),
@@ -122,11 +125,11 @@ class Api {
         if (!res.ok) throw new Error(`Error en servidor: ${res.status}`);
         return res.json();
       })
-      .catch((error) => console.error('Error', error));
+      .catch((error) => console.error("Error", error));
   }
 }
 
-const api = new Api('http://localhost:3000');
+const api = new Api("https://api.gabriel14.mooo.com");
 
 export default api;
 

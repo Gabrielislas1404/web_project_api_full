@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import trash from '../images/Trashelement.svg';
+import React, { useContext } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import trash from "../images/Trashelement.svg";
+
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   function handleClick() {
     onCardClick(card);
@@ -8,19 +9,22 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const likesNumber = card.likes.length;
 
   const { currentUser } = useContext(CurrentUserContext);
-  const isOwn = currentUser && card.owner._id === currentUser._id;
-  const cardDeleteButtonClassName = `elements__trash ${
-    isOwn ? 'elements__trash' : 'elements__trash_hidden'
+  const isOwn = currentUser && card.owner[0] === currentUser._id;
+
+  const cardDeleteButtonClassName = `${
+    isOwn ? "elements__trash" : "elements__trash_hidden"
   }`;
-  const isLiked =
-    currentUser && card.likes.some((i) => i._id === currentUser._id);
+
+  const isLiked = currentUser && card.likes.some((i) => i === currentUser._id);
+
   const cardLikeButtonClassName = `elements__heart ${
-    isLiked ? 'elements__black-heart' : ''
+    isLiked ? "elements__black-heart" : ""
   }`;
 
   const handleLikeClick = () => {
     onCardLike(card);
   };
+
   return (
     <div key={card._id} className="elements__container">
       <img
