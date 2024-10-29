@@ -3,11 +3,13 @@ const Card = require("../models/card");
 
 const getCards = async (req, res) => {
   try {
-    const cards = await Card.find({}).orFail(() => {
-      const error = new Error("Cards not found");
-      error.statusCode = 404;
-      throw error;
-    });
+    const cards = await Card.find({})
+      .sort({ createAd: -1 })
+      .orFail(() => {
+        const error = new Error("Cards not found");
+        error.statusCode = 404;
+        throw error;
+      });
     res.status(200).json(cards);
   } catch (error) {
     res.status(500).json({ message: error.message });
