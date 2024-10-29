@@ -1,40 +1,22 @@
-import React, { useState } from "react";
-import PopupWithForm from "./PopupWithForm";
+import React, { useState } from 'react';
+import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit }) {
-  const [name, setName] = useState("");
-  const [link, setLink] = useState("");
-
-  const isValidUrl = (urlString) => {
-    try {
-      return Boolean(new URL(urlString));
-    } catch (e) {
-      return false;
-    }
-  };
+  const [name, setName] = useState('');
+  const [link, setLink] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!name) {
-      alert("Por favor, introduce un título.");
-      return;
-    }
-
-    if (!isValidUrl(link)) {
-      alert("Por favor, introduce una URL válida.");
-      return;
-    }
-
     onAddPlaceSubmit({ name, link });
-    setName("");
-    setLink("");
+    setName('');
+    setLink('');
   };
 
   return (
     <PopupWithForm
-      name={"add-button"}
-      title={"Nuevo lugar"}
-      buttonTitle={"Crear"}
+      name={'add-button'}
+      title={'Nuevo lugar'}
+      buttonTitle={'Crear'}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}

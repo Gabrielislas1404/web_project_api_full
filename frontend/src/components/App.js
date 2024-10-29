@@ -46,9 +46,6 @@ function App() {
   }, []);
 
   const handleUpdateUser = ({ name, about }) => {
-    if (!name) name = currentUser.name;
-    if (!about) about = currentUser.about;
-
     api
       .updateUser({ name, about })
       .then((newUserData) => {

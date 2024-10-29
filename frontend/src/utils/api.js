@@ -42,9 +42,7 @@ class Api {
       }),
     })
       .then((res) => {
-        if (!res.ok) {
-          throw new Error(`Error en servidor: ${res.status}`);
-        }
+        if (!res.ok) throw new Error(`Error en servidor: ${res.status}`);
         return res.json();
       })
       .catch((error) => console.error('Error', error));
@@ -132,3 +130,6 @@ class Api {
 const api = new Api('https://api.gabriel14.mooo.com');
 
 export default api;
+
+/* const api = new Api('https://api.gabriel14.mooo.com');
+ */

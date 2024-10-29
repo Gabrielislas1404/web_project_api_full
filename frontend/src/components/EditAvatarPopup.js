@@ -1,37 +1,21 @@
-import { useContext, useRef } from "react";
-import PopupWithForm from "./PopupWithForm";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useRef } from 'react';
+import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
-  const { currentUser } = useContext(CurrentUserContext);
   const avatarRef = useRef();
-
-  const isValidUrl = (urlString) => {
-    try {
-      return Boolean(new URL(urlString));
-    } catch (e) {
-      return false;
-    }
-  };
 
   function handleSubmit(event) {
     event.preventDefault();
-
-    if (!isValidUrl(avatarRef.current.value)) {
-      alert("Por favor, introduce una URL válida.");
-      return;
-    }
-
     onUpdateAvatar({
-      avatar: avatarRef.current.value || currentUser.avatar,
+      avatar: avatarRef.current.value,
     });
   }
 
   return (
     <PopupWithForm
-      name={"profile-button"}
-      title={"Cambiar foto de perfil"}
-      buttonTitle={"Guardar"}
+      name={'profile-button'}
+      title={'Cambiar foto de perfil'}
+      buttonTitle={'Guardar'}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
